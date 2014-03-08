@@ -1,0 +1,40 @@
+<h1>Ranking Table</h1>
+<h5>**Two Points added for the video and the game</h5>
+<h5>**Blind Hour for the score at 3 pm</h5>
+<table class="table table-bordered">
+<%score=-1%>
+<% rank=0 %>
+<% duplicate=1%>
+<thead>
+	<td><%= "Rank" %></td>
+	<td><%= "Team" %></td>
+	<td><%= "Win" %></td>
+	<td><%= "Draw" %></td>
+	<td><%= "Lose" %></td>
+	<td><%= "Score" %></td>
+</thead>
+<% for i in 0..29%>
+	<%if score!=@teams.at(i)[:score] then%>
+		<%rank=rank+duplicate%>
+		<%duplicate=1%>
+	<%else %>
+		<%duplicate=duplicate+1%>
+	<%end%>
+	<%if rank<5 then%>
+		<tr class="success">
+    <%elsif rank<9 then%>
+		<tr class="warning">
+	<%elsif rank<13 then%>
+		<tr class="danger">
+	<%else%>
+		<tr>
+	<%end%>	
+	  <td><%= rank %></td>
+	  <td><%= @teams.at(i)[:name] %></td>
+	  <td><%= @teams.at(i)[:win] %></td>
+	  <td><%= @teams.at(i)[:draw] %></td>
+	  <td><%= @teams.at(i)[:lose] %></td>
+	  <td><%= score=@teams.at(i)[:score] %></td>
+	</tr>
+<% end %>
+</table>

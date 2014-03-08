@@ -1,0 +1,85 @@
+<%= form_for(@table) do |f| %>
+  <% if @table.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@table.errors.count, "error") %> prohibited this table from being saved:</h2>
+
+      <ul>
+      <% @table.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <% if current_user.account_type == "Refree" && current_user.game_special==Game.find(@table.game_played_id).name then %>
+  <div>
+  	<p>
+	  <b>time:</b>
+	  <% h=@table.time.hour.to_s%>
+	  <% if h.length==1 then%>
+	  	<% h="0"+h %>
+	  <% end %>
+	  <% m=@table.time.min.to_s%>
+	  <% if m.length==1 then%>
+	  	<% m="0"+m %>
+	  <% end %>
+      <%= h+":"+m %>
+	</p>
+	
+	<p>
+	  <b>Game:</b>
+	  <%= Game.find(@table.game_played_id).name %>
+	</p>
+	
+	<p>
+	  <b>Player:</b>
+	  <%= User.find(@table.player_id).username %>
+	</p>
+	
+	<p>
+	  <b>Opponent:</b>
+	  <%= User.find(@table.opponent_id).username %>
+	</p>
+	
+	<p>
+	  <b>Place:</b>
+	  <%= Place.find(@table.place_id).name %>
+	</p>
+  </div>
+  <% elsif current_user.account_type == "Admin" then %>
+  <div class="field">
+    <%= f.label :time %><br />
+    <%= f.time_select  :time %>
+  </div>
+  <div class="field">
+    <%= f.label :game %><br/>
+    <%= f.collection_select :game_played_id, Game.order(:name),:id,:name %>
+  </div>
+  <div class="field">
+    <%= f.label :player %><br/>
+    <%= f.collection_select :player_id, User.order(:username),:id,:username %>
+  </div>
+  <div class="field">
+    <%= f.label :opponent %><br/>
+    <%= f.collection_select :opponent_id, User.order(:username),:id,:username %>
+  </div>
+  <div class="field">
+    <%= f.label :place %><br/>
+    <%= f.collection_select :place_id, Place.order(:name),:id,:name %>
+  </div>
+  <% end %>
+  <div class="field">
+    <%= f.label :winner %><br/>
+    <% p="Player"%>
+    <% o="Opponent"%>
+    <% if @table.player_id!=nil then%>
+    	<%p=User.find(@table.player_id).username%>
+    <%end%>
+    <% if @table.opponent_id!=nil then%>
+    	<% o=User.find(@table.opponent_id).username%>
+    <%end%>
+    <%= f.select :winner, {"-"=>"-", p=>"W", o=>"L", "Draw"=>"D"} %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

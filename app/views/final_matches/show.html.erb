@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Time:</b>
+  <% post=@final_match %>
+  <% h=post.time.hour.to_s%>
+  <% if h.length==1 then%>
+	<% h="0"+h %>
+  <% end %>
+  <% m=post.time.min.to_s%>
+  <% if m.length==1 then%>
+	<% m="0"+m %>
+  <% end %>
+  <%= h+":"+m %>
+</p>
+
+<p>
+  <b>Player:</b>
+  <%= @final_match.player %>
+</p>
+
+<p>
+  <b>Opponent:</b>
+  <%= @final_match.opponent %>
+</p>
+
+<p>
+  <b>Game:</b>
+  <%= @final_match.game %>
+</p>
+
+<p>
+  <b>Winner:</b>
+  <%= @final_match.winner %>
+</p>
+
+
+<%= link_to 'Edit', edit_final_match_path(@final_match) %> |
+<%= link_to 'Back', final_matches_path %>

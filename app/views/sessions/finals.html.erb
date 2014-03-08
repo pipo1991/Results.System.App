@@ -1,0 +1,120 @@
+<h1>FinalsTable</h1>
+
+<h3>Last-12</h3>
+<table class="table table-bordered">
+<thead>
+	<td><%= "Time"%></td>
+	<td><%= "Game"%></td>
+	<td><%= "Player" %></td>
+	<td><%= "Opponent" %></td>
+	<td><%= "Winner" %></td>
+</thead>
+
+<% for i in 1..6 do%>
+<tr>
+	<% match=FinalMatch.find(i)%>
+	<% h=match.time.hour.to_s%>
+	<% if h.length==1 then%>
+	  	<% h="0"+h %>
+	<% end %>
+	<% m=match.time.min.to_s%>
+	<% if m.length==1 then%>
+	  	<% m="0"+m %>
+	<% end %>
+    <td><%= h+":"+m %></td>
+	<td><%= match.game %></td>
+	<td><%= match.player %></td>
+	<td><%= match.opponent %></td>
+	<td><%= match.winner %></td>
+</tr>
+<% end %>
+</table>
+
+<h3>Last-6</h3>
+<table class="table table-bordered">
+<thead>
+	<td><%= "Time"%></td>
+	<td><%= "Game"%></td>
+	<td><%= "Player" %></td>
+	<td><%= "Opponent" %></td>
+	<td><%= "Winner" %></td>
+</thead>
+
+<% for i in 7..9 do%>
+<tr>
+	<% match=FinalMatch.find(i)%>
+	<% h=match.time.hour.to_s%>
+	<% if h.length==1 then%>
+	  	<% h="0"+h %>
+	<% end %>
+	<% m=match.time.min.to_s%>
+	<% if m.length==1 then%>
+	  	<% m="0"+m %>
+	<% end %>
+    <td><%= h+":"+m %></td>
+	<td><%= match.game %></td>
+	<td><%= match.player %></td>
+	<td><%= match.opponent %></td>
+	<td><%= match.winner %></td>
+</tr>
+<% end %>
+</table>
+
+<h3>Semi-Finals</h3>
+<table class="table table-bordered">
+<thead>
+	<td><%= "Time"%></td>
+	<td><%= "Game"%></td>
+	<td><%= "Player" %></td>
+	<td><%= "Opponent" %></td>
+	<td><%= "Winner" %></td>
+</thead>
+
+<% for i in 10..11 do%>
+<tr>
+	<% match=FinalMatch.find(i)%>
+	<% h=match.time.hour.to_s%>
+	<% if h.length==1 then%>
+	  	<% h="0"+h %>
+	<% end %>
+	<% m=match.time.min.to_s%>
+	<% if m.length==1 then%>
+	  	<% m="0"+m %>
+	<% end %>
+    <td><%= h+":"+m %></td>
+	<td><%= match.game %></td>
+	<td><%= match.player %></td>
+	<td><%= match.opponent %></td>
+	<td><%= match.winner %></td>
+</tr>
+<% end %>
+</table>
+
+
+<h3>Final</h3>
+<table class="table table-bordered">
+<thead>
+	<td><%= "Time"%></td>
+	<td><%= "Game"%></td>
+	<td><%= "Player" %></td>
+	<td><%= "Opponent" %></td>
+	<td><%= "Winner" %></td>
+</thead>
+
+<tr>
+	<% match=FinalMatch.find(12)%>
+	<% h=match.time.hour.to_s%>
+	<% if h.length==1 then%>
+	  	<% h="0"+h %>
+	<% end %>
+	<% m=match.time.min.to_s%>
+	<% if m.length==1 then%>
+	  	<% m="0"+m %>
+	<% end %>
+    <td><%= h+":"+m %></td>
+	<td><%= match.game %></td>
+	<td><%= match.player %></td>
+	<td><%= match.opponent %></td>
+	<td><%= match.winner %></td>
+</tr>
+</table>

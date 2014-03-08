@@ -1,0 +1,37 @@
+<h1>Show All games Table</h1>
+
+<table class="table table-bordered">
+<% tableGames=Table.all %>
+<thead>
+	<td><%= "Time" %></td>
+	<td><%= "Game" %></td>
+	<td><%= "Player" %></td>
+	<td><%= "Opponent" %></td>
+	<td><%= "Winner" %></td>
+</thead>
+<% for i in tableGames do%>
+	<tr>
+	  <% h=i.time.hour.to_s%>
+	  <% if h.length==1 then%>
+	  	<% h="0"+h %>
+	  <% end %>
+	  <% m=i.time.min.to_s%>
+	  <% if m.length==1 then%>
+	  	<% m="0"+m %>
+	  <% end %>
+      <td><%= h+":"+m %></td>
+	  <td><%= Game.find(i.game_played_id).name%></td>
+	  <td><%= p=User.find(i.player_id).username%></td>
+	  <td><%= o=User.find(i.opponent_id).username%></td>
+	  <% if i.winner=="W" then %>
+	  <td><%= p %></td>
+	  <% elsif i.winner=="L" then %>
+	  <td><%= o %></td>
+	  <% elsif i.winner=="D" then %>
+	  <td><%= "Draw" %></td>
+	  <%else %>
+	  <td><%= "Not played" %></td>
+	  <%end%>
+	</tr>
+<% end %>
+</table>

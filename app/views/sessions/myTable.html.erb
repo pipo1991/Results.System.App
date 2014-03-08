@@ -1,0 +1,59 @@
+<h1>Show My games Table</h1>
+<ul class="list-group">
+  <li class="list-group-item" style="color:red">
+    Including
+  </li>
+  <li class="list-group-item">
+    <span class="badge">12:00</span>
+    Prayer
+  </li>
+  <li class="list-group-item">
+    <span class="badge">15:00</span>
+    Lunch
+  </li>
+  <li class="list-group-item">
+    <span class="badge">18:00</span>
+    Surprise
+  </li>
+  <li class="list-group-item">
+    <span class="badge">19:00</span>
+    Finals
+  </li>
+</ul>
+<table class="table table-bordered">
+<% id=current_user.id %>
+<% tableGames=Table.where("player_id = ? or opponent_id = ?",id,id).order("time ASC") %>
+<thead>
+	<td><%= "Time" %></td>
+	<td><%= "Game" %></td>
+	<td><%= "Player" %></td>
+	<td><%= "Opponent" %></td>
+	<td><%= "Winner" %></td>
+</thead>
+<% for i in tableGames do%>
+	<tr>
+	  <% h=i.time.hour.to_s%>
+	  <% if h.length==1 then%>
+	  	<% h="0"+h %>
+	  <% end %>
+	  <% m=i.time.min.to_s%>
+	  <% if m.length==1 then%>
+	  	<% m="0"+m %>
+	  <% end %>
+      <td><%= h+":"+m %></td>
+	  <td><%= Game.find(i.game_played_id).name%></td>
+	  <td><%= p=User.find(i.player_id).username%></td>
+	  <td><%= o=User.find(i.opponent_id).username%></td>
+	  <% if i.winner=="W" then %>
+	  <td><%= p %></td>
+	  <% elsif i.winner=="L" then %>
+	  <td><%= o %></td>
+	  <% elsif i.winner=="D" then %>
+	  <td><%= "Draw" %></td>
+	  <%else %>
+	  <td><%= "Not played" %></td>
+	  <%end%>
+	  
+	</tr>
+<% end %>
+</table>

@@ -1,0 +1,15 @@
+<h1>News !!</h1>
+<h4>** If you faced any problem send us an email to crazeative@gmail.com</h4>
+
+<% p=Post.find(:all, :order => "updated_at DESC")%>
+<% p.each do |post| %>
+<div class="panel panel-default">
+  <div class="panel-heading"><%= post.title.to_s+"  " %><span style="color:red"><%= post.updated_at%></span></div>
+  <div class="panel-body">
+    <%= post.body %>
+  </div>
+</div>
+<% end %>
+
+
+<br />

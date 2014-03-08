@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Sportsday6</title>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+	
+<nav class="navbar navbar-inverse" role="navigation">
+<div class="container-fluid">	
+	  <% if current_user then%>
+	  <div class="navbar-header">
+	   	<a class="navbar-brand">Welcome <%= current_user.username %> :) </a>
+	  </div>
+	  <div class="nav navbar-nav">
+	  	<li>
+	    	<%= link_to "News", :news%>
+	    </li>
+	  	<% if current_user.account_type=="Team" then%>
+	    <li>
+	    	<%= link_to "MyTable", :myTable%>
+	    </li>
+	    <% elsif current_user.account_type=="Refree" then%>
+	    <li>
+	    	<%= link_to current_user.game_special+" Scores", :tables%>
+	    </li>
+	    <% elsif current_user.account_type=="Admin" then%>
+	    <li>
+	    	<%= link_to "Tables", :tables%> 
+	    </li>
+	    <li>
+	    	<%= link_to "Posts", :posts%>
+	    </li>	
+	    <li>
+	    	<%= link_to "Games", :games%>
+	    </li>
+	    <li>
+	    	<%= link_to "Places", :places%>
+	    </li>
+	    <li>
+	    	<%= link_to "Blind Time", :blind_times%>
+	    </li>
+	    <li>
+	    	<%= link_to "Finals Edit", :final_matches%> 
+	    </li>
+	    <% end %>
+	    <li>
+	    	<%= link_to "All Tables", :allTables%>
+	    </li>
+	    <li>
+	    	<%= link_to "Ranking", :rank %>
+	    </li>
+	    <li>
+	    	<%= link_to "Finals", :last %>
+	    </li>
+	  	<li>
+	    	<%= link_to "Log out", log_out_path %>
+	    </li>
+	  </div>
+	  <% else %>
+	  <div class="navbar-header">
+	   	<a class="navbar-brand">Crazeative App</a>
+	  </div>
+	  <% end %>
+	
+  </div>
+</nav>
+
+
+<div class="container">
+	<%= yield %>
+
+<% if flash.count>0 then %>
+<div class="alert alert-info">
+	<% flash.each do |name, msg| %>
+	  <%= content_tag :div, msg, :id => "flash_#{name}" %>
+	<% end %>
+</div>
+<% end %>
+
+</div>
+
+</body>
+</html>

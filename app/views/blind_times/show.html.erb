@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Time:</b>
+  <% i=@blind_time.time %>
+  	<% h=i.hour.to_s%>
+	  <% if h.length==1 then%>
+	  	<% h="0"+h %>
+	  <% end %>
+	  <% m=i.min.to_s%>
+	  <% if m.length==1 then%>
+	  	<% m="0"+m %>
+	  <% end %>
+   <%= h+":"+m %>
+</p>
+
+
+<%= link_to 'Edit', edit_blind_time_path(@blind_time) %> |
+<%= link_to 'Back', blind_times_path %>

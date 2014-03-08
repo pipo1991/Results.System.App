@@ -1,0 +1,38 @@
+<h1>Listing final_matches</h1>
+
+<table class="table table-bordered">
+  <tr>
+    <th>Time</th>
+    <th>Player</th>
+    <th>Opponent</th>
+    <th>Game</th>
+    <th>Winner</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @final_matches.each do |final_match| %>
+  <tr>
+      <% post=final_match %>
+	  <% h=post.time.hour.to_s%>
+	  <% if h.length==1 then%>
+		<% h="0"+h %>
+	  <% end %>
+	  <% m=post.time.min.to_s%>
+	  <% if m.length==1 then%>
+		<% m="0"+m %>
+	  <% end %>
+	  <td><%= h+":"+m %></td>
+    <td><%= final_match.player %></td>
+    <td><%= final_match.opponent %></td>
+    <td><%= final_match.game %></td>
+    <td><%= final_match.winner %></td>
+    <td><%= link_to 'Show', final_match %></td>
+    <td><%= link_to 'Edit', edit_final_match_path(final_match) %></td>
+    <td><%= link_to 'Destroy', final_match, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />

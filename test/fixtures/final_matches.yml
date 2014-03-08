@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  time: 
+  player: MyString
+  opponent: MyString
+  game: MyString
+  winner: MyString
+
+two:
+  time: 
+  player: MyString
+  opponent: MyString
+  game: MyString
+  winner: MyString

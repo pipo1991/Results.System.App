@@ -1,0 +1,24 @@
+<h1>Listing blind_times</h1>
+<table class="table">
+  <thead>
+    <th>Time</th>
+    <th></th>
+    <th></th>
+  </thead>
+<% @blind_times.each do |blind_time| %>
+  <tr>
+  	<% i=blind_time.time %>
+  	<% h=i.hour.to_s%>
+	  <% if h.length==1 then%>
+	  	<% h="0"+h %>
+	  <% end %>
+	  <% m=i.min.to_s%>
+	  <% if m.length==1 then%>
+	  	<% m="0"+m %>
+	  <% end %>
+    <td><%= h+":"+m %></td>
+    <td><%= link_to 'Show', blind_time %></td> |
+    <td><%= link_to 'Edit', edit_blind_time_path(blind_time) %></td>
+  </tr>
+<% end %>
+</table>

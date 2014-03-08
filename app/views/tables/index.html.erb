@@ -1,0 +1,65 @@
+<h1>Listing Fixtures</h1>
+
+<table class="table table-bordered">
+  <tr>
+    <th>Time</th>
+    <th>Game</th>
+    <th>Player</th>
+    <th>Opponent</th>
+    <th>Place</th>
+    <th>Winner</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @tables.each do |post| %>
+	
+  <% if current_user.account_type == "Refree" && current_user.game_special==Game.find(post.game_played_id).name then %>
+	  <tr>
+	  	    <% h=post.time.hour.to_s%>
+		    <% if h.length==1 then%>
+		  	  <% h="0"+h %>
+		    <% end %>
+		    <% m=post.time.min.to_s%>
+			<% if m.length==1 then%>
+			  <% m="0"+m %>
+		    <% end %>
+	        <td><%= h+":"+m %></td>
+			<td><%= Game.find(post.game_played_id).name%></td>
+			<td><%= User.find(post.player_id).username%></td>
+			<td><%= User.find(post.opponent_id).username%></td>
+			<td><%= Place.find(post.place_id).name %></td>
+			<td><%= post.winner %></td>  
+		    <td><%= link_to 'Show', post %></td>
+		    <td><%= link_to 'Upate Score', edit_table_path(post) %></td>
+	  </tr>
+  <%elsif current_user.account_type == "Admin" then %>
+  	<tr>
+		    <% h=post.time.hour.to_s%>
+		    <% if h.length==1 then%>
+		  	  <% h="0"+h %>
+		    <% end %>
+		    <% m=post.time.min.to_s%>
+			<% if m.length==1 then%>
+			  <% m="0"+m %>
+		    <% end %>
+	        <td><%= h+":"+m %></td>
+			<td><%= Game.find(post.game_played_id).name%></td>
+			<td><%= User.find(post.player_id).username%></td>
+			<td><%= User.find(post.opponent_id).username%></td>
+			<td><%= Place.find(post.place_id).name %></td>
+			<td><%= post.winner %></td> 
+		    <td><%= link_to 'Show', post %></td>
+		    <td><%= link_to 'Edit', edit_table_path(post) %></td>
+		    <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+	  </tr>
+  <%end%>
+  	  
+<% end %>
+</table>
+
+<br />
+<%if current_user.account_type == "Admin" then %>
+	<%= link_to 'New Fixture', new_table_path %>
+<%end%>

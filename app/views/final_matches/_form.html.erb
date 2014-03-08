@@ -1,0 +1,45 @@
+<%= form_for(@final_match) do |f| %>
+  <% if @final_match.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@final_match.errors.count, "error") %> prohibited this final_match from being saved:</h2>
+
+      <ul>
+      <% @final_match.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :time %><br />
+    <%= f.time_select :time %>
+  </div>
+  <div class="field">
+    <%= f.label :player %><br />
+    <%= f.collection_select :player, User.order(:username),:username,:username %>
+  </div>
+  <div class="field">
+    <%= f.label :opponent %><br />
+    <%= f.collection_select :opponent, User.order(:username),:username,:username %>
+  </div>
+  <div class="field">
+    <%= f.label :game %><br />
+    <%= f.collection_select :game, Game.order(:name),:name,:name %>
+  </div>
+  <div class="field">
+    <%= f.label :winner %><br />
+    <% p="Player"%>
+    <% o="Opponent"%>
+    <% if @final_match.player!=nil then%>
+    	<%p=@final_match.player%>
+    <%end%>
+    <% if @final_match.opponent!=nil then%>
+    	<% o=@final_match.opponent %>
+    <%end%>
+    <%= f.select :winner, {"Not played"=>"Not played", p=>p, o=>o} %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

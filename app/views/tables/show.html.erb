@@ -1,0 +1,49 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>time:</b>
+  <% h=@table.time.hour.to_s%>
+  <% if h.length==1 then%>
+	  <% h="0"+h %>
+  <% end %>
+  <% m=@table.time.min.to_s%>
+  <% if m.length==1 then%>
+	  <% m="0"+m %>
+  <% end %>
+  <%= h+":"+m %>
+</p>
+<p>
+  <b>Game:</b>
+  <%= Game.find(@table.game_played_id).name %>
+</p>
+
+<p>
+  <b>Player:</b>
+  <%= User.find(@table.player_id).username %>
+</p>
+
+<p>
+  <b>Opponent:</b>
+  <%= User.find(@table.opponent_id).username %>
+</p>
+
+<p>
+  <b>Place:</b>
+  <%= Place.find(@table.place_id).name %>
+</p>
+
+<p>
+  <b>Winner:</b>
+  <% if @table.winner=="W" then%>
+  	<%= User.find(@table.player_id).username%>
+  <%elsif @table.winner=="L" then%>
+  	<%= User.find(@table.opponent_id).username%>
+  <%elsif @table.winner=="D" then%>
+   	<%= "Draw" %>
+  <%else %>
+  	<%= "Not played" %>
+  <%end%>
+</p>
+
+<%= link_to 'Edit', edit_table_path(@table) %> |
+<%= link_to 'Back', tables_path %>
